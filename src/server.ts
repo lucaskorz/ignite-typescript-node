@@ -1,10 +1,15 @@
 import express from 'express'
-import { createCourse } from './routes';
 
 const app = express()
+app.use(express.json())
 
-app.get('/', createCourse) 
-
-app.listen(3333, () => {
-  console.log('Aplicação rodando na porta 3333')
+app.get('/', (request, response) => {
+  return response.json('Hello World')
 })
+
+app.post('/courses', (request, response) => {
+  const { name } = request.body
+  return response.json({ name })
+})
+
+app.listen(3333, () => console.log('Aplicação rodando com sucesso!'))
